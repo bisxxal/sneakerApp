@@ -40,7 +40,7 @@ export default function TabLayout() {
         name="shoes"
         options={{
           title: 'Shoes',
-          header: () => null,
+          // header: () => null,
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>

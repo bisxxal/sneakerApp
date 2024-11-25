@@ -1,33 +1,19 @@
 import { FlatList } from 'react-native'; 
-import NewArivals from '@/components/NewArivals';
-import { useEffect, useState } from 'react';
+import NewArivals from '@/components/NewArivals'; 
+import { useStore } from '@/context/StroeContext';
 
 export default function TabOneScreen() {
-  const [list, setList] = useState([]); 
-  const url = `https://snkerbackend.onrender.com`
-
-  useEffect(() => {
-      const fetchData = async () => {
-          try {
-            
-          const response = await fetch(`${url}/api/shoes/list`);
-          response.json().then((data) => { 
-              setList(data.allShoes)
-          }
-          );
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
-      fetchData();
-    }, []);
-
-
+  const storeContext = useStore();
+  if (!storeContext) {
+    return null;  
+  }
+  const { url, list } = storeContext;
+  
   return ( 
        <FlatList
             data={list} 
             renderItem={({item}) => (
-              <NewArivals item={item} />
+              <NewArivals item={item} url={url} />
             )}
             numColumns={2}
             contentContainerStyle={{backgroundColor: '#18181B'}}

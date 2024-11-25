@@ -1,19 +1,16 @@
 import { Image, Pressable, StyleSheet } from 'react-native'; 
 import { Text, View } from './Themed' 
 import { Link } from 'expo-router';
+import { Product } from '@/context/StroeContext';
 
 const defimge = 'https://snkerbackend.onrender.com/images/17174194596222_3cad2f96-8f31-468a-a871-0f07290b01ef.webp'
-const NewArivals = ({item}:any) => {
+const NewArivals = ({item , url}:{item:Product , url:string}) => {
    
   return (
     <Link href={`/shoes/${item._id}`} asChild >
 
         <Pressable key={item._id} style={styles.sdiv}>
-        <Image 
-          source={{ uri: `https://snkerbackend.onrender.com/images/${item.image}` || defimge }} 
-          style={styles.image} 
-          resizeMode="cover" // Use this prop directly on the Image component
-        />
+        <Image source={{ uri: `${url}/images/${item.image}` || defimge }} style={styles.image} resizeMode="cover"/>
            <View style={styles.textarea}> 
             <Text style={styles.htext}>{item.name}</Text>
             <Text style={styles.price}>₹{item.price}</Text> 
